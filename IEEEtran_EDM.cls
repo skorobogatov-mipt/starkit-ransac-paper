@@ -4853,7 +4853,7 @@ between column types.}%
 \else% not a technote
    \vskip0.2em{\Huge\ifCLASSOPTIONtransmag\bfseries\LARGE\fi\@IEEEcompsoconly{\sffamily}\@IEEEcompsocconfonly{\normalfont\normalsize\vskip 2\@IEEEnormalsizeunitybaselineskip
    \bfseries\Large}\@IEEEcompsocnotconfonly{\vskip 0.75\@IEEEnormalsizeunitybaselineskip}\@title\par}\relax
-   \@IEEEcompsocnotconfonly{\vskip 0.5\@IEEEnormalsizeunitybaselineskip}\vskip1.2em\par%
+   \@IEEEcompsocnotconfonly{\vskip 0.5\@IEEEnormalsizeunitybaselineskip}\vskip32pt\par%
    % V1.6 handle \author differently if in conference mode
    \ifCLASSOPTIONconference%
       {\@IEEEspecialpapernotice\mbox{}\vskip\@IEEEauthorblockconfadjspace%
@@ -4997,7 +4997,7 @@ between column types.}%
    \vskip 1\baselineskip plus 0.375\baselineskip minus 0.1875\baselineskip
 \else
    \ifCLASSOPTIONconference% conference
-      \vskip 1\baselineskip plus 0.375\baselineskip minus 0.1875\baselineskip%
+      \vskip 24pt%
    \else%
       \ifCLASSOPTIONtechnote% technote
          \vskip 1\baselineskip plus 0.375\baselineskip minus 0.1875\baselineskip%

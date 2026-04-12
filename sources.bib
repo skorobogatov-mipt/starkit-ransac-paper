@@ -7,6 +7,25 @@
   version = {v0.6.0},
   year = {2022}
 }
+@article{ransac-orig,
+    author = {Fischler, Martin A. and Bolles, Robert C.},
+    title = {Random sample consensus: a paradigm for model fitting with applications to image analysis and automated cartography},
+    year = {1981},
+    issue_date = {June 1981},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    volume = {24},
+    number = {6},
+    issn = {0001-0782},
+    url = {https://doi.org/10.1145/358669.358692},
+    doi = {10.1145/358669.358692},
+    abstract = {A new paradigm, Random Sample Consensus (RANSAC), for fitting a model to experimental data is introduced. RANSAC is capable of interpreting/smoothing data containing a significant percentage of gross errors, and is thus ideally suited for applications in automated image analysis where interpretation is based on the data provided by error-prone feature detectors. A major portion of this paper describes the application of RANSAC to the Location Determination Problem (LDP): Given an image depicting a set of landmarks with known locations, determine that point in space from which the image was obtained. In response to a RANSAC requirement, new results are derived on the minimum number of landmarks needed to obtain a solution, and algorithms are presented for computing these minimum-landmark solutions in closed form. These results provide the basis for an automatic system that can solve the LDP under difficult viewing},
+    journal = {Commun. ACM},
+    month = jun,
+    pages = {381–395},
+    numpages = {15},
+    keywords = {automated cartography, camera calibration, image matching, location determination, model fitting, scene analysis}
+}
 @software{SCUF,
   author = {Ryakin, Ilya},
   title = {{SCUF}},
@@ -56,4 +75,49 @@
       doi = "http://dx.doi.org/10.1016/j.cviu.2015.08.005",
       url = "http://www.sciencedirect.com/science/article/pii/S1077314215001800",
       author = "Dmytro Mishkin and Jiri Matas and Michal Perdoch"
+}
+@misc{open3d,
+      title={Open3D: A Modern Library for 3D Data Processing}, 
+      author={Qian-Yi Zhou and Jaesik Park and Vladlen Koltun},
+      year={2018},
+      eprint={1801.09847},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/1801.09847}, 
+}
+@Article{         numpy,
+ title         = {Array programming with {NumPy}},
+ author        = {Charles R. Harris and K. Jarrod Millman and St{\'{e}}fan J.
+                 van der Walt and Ralf Gommers and Pauli Virtanen and David
+                 Cournapeau and Eric Wieser and Julian Taylor and Sebastian
+                 Berg and Nathaniel J. Smith and Robert Kern and Matti Picus
+                 and Stephan Hoyer and Marten H. van Kerkwijk and Matthew
+                 Brett and Allan Haldane and Jaime Fern{\'{a}}ndez del
+                 R{\'{i}}o and Mark Wiebe and Pearu Peterson and Pierre
+                 G{\'{e}}rard-Marchant and Kevin Sheppard and Tyler Reddy and
+                 Warren Weckesser and Hameer Abbasi and Christoph Gohlke and
+                 Travis E. Oliphant},
+ year          = {2020},
+ month         = sep,
+ journal       = {Nature},
+ volume        = {585},
+ number        = {7825},
+ pages         = {357--362},
+ doi           = {10.1038/s41586-020-2649-2},
+ publisher     = {Springer Science and Business Media {LLC}},
+ url           = {https://doi.org/10.1038/s41586-020-2649-2}
+}
+@misc{bourke_circlesphere,
+  author = {Paul Bourke},
+  title = {Circle, Cylinder, Sphere},
+  year = {1992},
+  url = {http://paulbourke.net/geometry/circlesphere/},
+  note = {Accessed: 2026-04-10}
+}
+@software{skorobogatov2026starkit,
+  author = {Skorobogatov, Egor and Vakhnenko, Robert and Grimalyuk, Pyotr and Osokin, Ilya},
+  title = {starkit-ransac},
+  url = {https://github.com/skorobogatov-mipt/starkit-ransac-python},
+  year = {2026},
+  note = {Python RANSAC Library for Common Primitives on Point Clouds}
 }

@@ -8,8 +8,37 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 
-\usepackage{biblatex}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+\usepackage{setspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage{setspace}
+% \renewcommand{\baselinestretch}{0.95}
+%
+% % Межабзацный интервал
+% \setlength{\parskip}{6pt plus 1pt minus 1pt}
+%
+% % Отступ первой строки абзаца (красная строка)
+% \setlength{\parindent}{5mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage[sorting=none,maxbibnames=6]{biblatex}
 \addbibresource{sources.bib}
+
+\usepackage{geometry}
+\geometry{
+ a4paper,
+ top=19mm,
+ bottom=25.4mm,
+ left=16mm,
+ right=16mm
+}
+
+\renewcommand{\baselinestretch}{0.95}
+\setlength{\parskip}{6pt plus 1pt minus 1pt}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -25,122 +54,101 @@
 }
 \makeatother
 
+\usepackage{stfloats}
 \usepackage{flushend} % <------------- used for automatically balance the columns on the last page. Be careful, read HOWTO XIV. LAST PAGE COLUMN EQUALIZATION 
 
 \begin{document}
 
 \markboth{\confheader}{}
-\title{Python RANSAC Library for Common Objects}
+\title{Python RANSAC Library for Common Primitives on Point Clouds}
 \author{
-\IEEEauthorblockN{line 1: 1\textsuperscript{st} Egor Skorobogatov}
-\IEEEauthorblockA{\textit{line 2: dept. name of organization}\\ 
-\textit{(of Affiliation)} \\
-\textit{line 3: name of organization}\\ 
-\textit{(of Affiliation)}\\
-line 4: City, Country \\
-line 5: email address or ORCID}
+\IEEEauthorblockN{Egor Skorobogatov}
+\IEEEauthorblockA{\textit{Moscow Institute of Physics and Technology}\\ 
+Dolgoprudny, Russia \\
+0009-0007-7181-9071 \\
+}
 \and
-\IEEEauthorblockN{line 1: 2\textsuperscript{nd} Robert Vakhnenko}
-\IEEEauthorblockA{\textit{line 2: dept. name of organization}\\ 
-\textit{(of Affiliation)} \\
-\textit{line 3: name of organization}\\ 
-\textit{(of Affiliation)}\\
-line 4: City, Country \\
-line 5: email address or ORCID}
-\and
-\IEEEauthorblockN{line 1: 3\textsuperscript{rd} Pyotr Grimalyuk}
-\IEEEauthorblockA{\textit{line 2: dept. name of organization}\\ 
-\textit{(of Affiliation)} \\
-\textit{line 3: name of organization}\\ 
-\textit{(of Affiliation)}\\
-line 4: City, Country \\
-line 5: email address or ORCID}
+\IEEEauthorblockN{Robert Vakhnenko}
+\IEEEauthorblockA{\textit{Moscow Institute of Physics and Technology}\\ 
+Dolgoprudny, Russia \\
+vakhnenko.ri@phystech.edu}
 
 \linebreakand  % <------------- and with a line-break
 
-\IEEEauthorblockN{line 1: 4\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{line 2: dept. name of organization}\\ 
-\textit{(of Affiliation)} \\
-\textit{line 3: name of organization}\\ 
-\textit{(of Affiliation)}\\
-line 4: City, Country \\
-line 5: email address or ORCID}
+\IEEEauthorblockN{Pyotr Grimalyuk}
+\IEEEauthorblockA{\textit{Moscow Institute of Physics and Technology}\\ 
+Dolgoprudny, Russia  \\
+grimaliuk.pn@phystech.edu}
 \and
-\IEEEauthorblockN{line 1: 5\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{line 2: dept. name of organization}\\ 
-\textit{(of Affiliation)} \\
-\textit{line 3: name of organization}\\ 
-\textit{(of Affiliation)}\\
-line 4: City, Country \\
-line 5: email address or ORCID}
-\and
-\IEEEauthorblockN{line 1: 6\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{line 2: dept. name of organization}\\ 
-\textit{(of Affiliation)} \\
-\textit{line 3: name of organization}\\ 
-\textit{(of Affiliation)}\\
-line 4: City, Country \\
-line 5: email address or ORCID}
+\IEEEauthorblockN{Ilya Osokin}
+\IEEEauthorblockA{\textit{Moscow Institute of Physics and Technology}\\ 
+Dolgoprudny, Russia  \\
+0000-0003-1476-0126}
 }
 
 \maketitle
 
-
 \begin{abstract}
 
-RANSAC is one of the most popular and important algorighms in computer vision.
+RANSAC, first presented in \cite{ransac-orig} is one of the most popular and important algorithms in computer vision.
 It is being used in robotics, medical imaging and many more fields. Also,
-python is one of the most frequently used languages at the moment, especially
-in computer vision. In spite of the facts above, the options for a python
-library for RANSAC that works out of the box are very limited. This paper is
-about starkit-ransac -- a python package with algorithms for detecting most of
-the common objects. In this work, firstly we go over alternatives: pyRANSAC-3D
-and scuf. We look at their advantages and disadvantages and how we can improve
-on existing solutions. Secondly, we present our own solution -- starkit-ransac
--- a batteries-included python library for RANSAC. Third, we compare this
-library to it's alternatives via benchmarks and ease of use. In short, this
-package is significantly faster on some shapes that are included in pyRANSAC-3D
-and a bit slower, but more modular than scuf.
+Python is one of the most frequently used languages at the moment, especially
+in computer vision. In spite of the facts above, the options for a Python
+library for RANSAC that works out-of-the-box are very limited. This presents
+starkit-ransac -- a Python package with algorithms for detecting most of the
+common objects. In this work, firstly we go over alternatives: pyRANSAC-3D and
+SCUF. We look at their advantages and disadvantages and how we can improve on
+existing solutions. Secondly, we present our own solution -- starkit-ransac --
+a self-contained Python library for RANSAC with fitting, data generation and
+visualization. Finally, we compare this library to its alternatives via
+benchmarks and ease of use. Overall, starkit-ransac demonstrates significantly
+faster fitting times on several primitives while offering a more modular and
+flexible architecture than SCUF and pyRANSAC-3D, allowing for easy addition of
+new shapes.
 
 \end{abstract}
 
 \begin{IEEEkeywords}
-RANSAC, python, computer vision, detection, library, package
+RANSAC, Python, computer vision, detection, library, package, point cloud
 \end{IEEEkeywords}
 
 \section{Introduction}
-RANSAC is a computer vision algorightm that is quite simple: 
+RANSAC(Random Sample Consensus) is a computer vision algorithm that is quite simple: 
 \begin{enumerate}
     \item take some samples from the dataset,
     \item build a hypothesis from these samples,
     \item check this hypothesis' quality on the whole dataset,
     \item select the best hypothesis.
 \end{enumerate}
-This algorithm provides robust detection of objects and that is what gives it
-it's popularity. Having a package that already contains some basic objects that
-are used frequently and acts as a framework would be quite useful in many
-fields, such as robotics. At the moment, despite RANSAC's ubiquity, there are
-no python packages that satisfy these conditions. Thus, a python package that
-is modular, contains, all the basic shapes and works out of the box is
-presented.
+Typically, hypothesis quality is estimated using distance threshold. All points
+that lie within the threshold distance to the hypothesis are considered
+inliers. In its basic variation, RANSAC selects the hypothesis that has the
+most inliers.
+This algorithm provides robust detection of objects and that is what
+gives it its popularity. Having a package that already contains some basic
+objects that are used frequently and acts as a framework would be quite useful
+in many fields, such as robotics. 
+While RANSAC is widely implemented, few packages offer a cohesive, maintained
+solution for 3D geometric primitives. Thus, a Python package that is modular,
+contains all the basic shapes and works out of the box is presented.
 
 \section{Previous Works}
-During research on available solutions, we found a lot and very few at the same
-time. Scipy\cite{2020SciPy-NMeth} presents a ransac algorithm for linear
-regression, and some other solutions present RANSAC for homography and
-fundamental matrix \cite{Mishkin2015MODS}. However, there are just two
-prominent libraries for RANSAC on points clouds:
-pyRANSAC-3D\cite{Mariga_pyRANSAC-3D_2022} and scuf\cite{SCUF}. These packages
-do some things well, but we believe, that we could improve on them.
+Our review revealed numerous RANSAC implementations, yet few are tailored for
+3D geometric primitives in Python. Scipy\cite{2020SciPy-NMeth} presents a
+RANSAC algorithm for linear regression, and some other solutions present RANSAC
+for homography and fundamental matrix \cite{Mishkin2015MODS}. However, there
+are just two prominent libraries for RANSAC on points clouds:
+pyRANSAC-3D\cite{Mariga_pyRANSAC-3D_2022} and SCUF\cite{SCUF}. These packages
+do some things well, but we believe that we could improve on them.
 
 \subsection{pyRANSAC-3D}
-pyRANSAC-3D \cite{Mariga_pyRANSAC-3D_2022} is a python package
-pyRANSAC-3D contains all the basic shapes: 
+pyRANSAC-3D \cite{Mariga_pyRANSAC-3D_2022} is a Python package that contains
+all the basic shapes: 
 \begin{itemize}
     \item line,
     \item plane,
     \item circle in space,
-    \item cuboid(intersection of three perpendicular planes),
+    \item cuboid (intersection of three perpendicular planes),
     \item cylinder
 \end{itemize}
 This is a good set of objects that may be used almost anywhere and this package
@@ -148,15 +156,15 @@ is really simple to use out-of-the-box.
 
 However, this package has some critical issues. Firstly, it has remained
 unmaintained since 2022, so no new shapes were added and chances are, they will
-not be. Also, this library's code for circle in space contains a severe bug
+not be. Also, this library's code for circle in space contains a significant bug
 that prevents correct detection. Other significant drawback that we would like
-to improve on is modularity. pyRANSAC-3D is effectively a collection of RANSAC
+to improve on is modularity; pyRANSAC-3D is effectively a collection of RANSAC
 scripts without any overarching structure, so adding a new shape is not as
 simple as it could be. And lastly, this library's code for fitting can be sped
-up, as shown in %todo: add speedup.
+up, as will be shown later.
 
 
-\subsection{scuf}
+\subsection{SCUF}
 Another solution that we found was SCUF -- Spheroid Consensus Undeterministic
 Fitting. This is a package that implements fitting for all the quadrics --
 surfaces that are described by equation \eqref{eq:quadric-eq}.
@@ -171,31 +179,33 @@ It is worth noticing that \eqref{eq:quadric-eq} can be expanded to
 \eqref{eq:quadric-expanded} which also covers line and plane in 3d, and circle
 and ellipsoid in 2d.
 \begin{multline}
-    A x^2 + B y^2 + C z^2 + D xy + \\+ E xz + F yz + G x + H y + I z + J = 0
+    A x^2 + B y^2 + C z^2 + D xy + \\ 
+    + E xz + F yz + G x + H y + I z + J = 0
     \label{eq:quadric-expanded}
 \end{multline}
 
 The approach that SCUF uses allows for a faster hypothesis score estimation
-beacuse it can easily be vectorized. SCUF's RANSAC works like this:
+because it can easily be vectorized. SCUF's RANSAC works like this:
 \begin{enumerate}
     \item create a list of all sample sets iterations,
-    \item create a list of hypothesis models for each sample set,
-    \item estimate all models in one go, by applying \eqref{eq:quadric-expanded}
+    \item create a list of hypotheses for each sample set,
+    \item evaluate all hypotheses against the full dataset in a single
+        vectorized operation, by applying \eqref{eq:quadric-expanded}
         to the whole dataset.
 \end{enumerate}
 This allows for a very fast fitting, because using one numpy\cite{numpy} matrix
 operation is much faster than using it multiple times. At the same time, this
-approach limits this implemetation only to shapes that can be easily expressed
+approach limits this implementation only to shapes that can be easily expressed
 in closed form. Thus, one of the goals that we strive for is making our library
 more flexible and allowing for any shape.
 
 Another problem of this library is that despite having some code for all the
 shapes listed above, it seems that only ellipsoid works. This library provides
-no acces to RANSAC fitting of any shapes except ellipsoid, ellipse, plane and
-line in 2D. Ellipsoid detection works quite well, and it's implemetation is
-quite efficient, as will be shown %todo: add speed comparison
-. This, however, cannot be said for ellipse, plane and line2d. scuf's RANSAC
-for these surfaces may work fine, but no acces to it is provided directly.
+no access to RANSAC fitting of any shapes except ellipsoid, ellipse, plane and
+line in 2D. Ellipsoid detection works quite well, and its implementation is
+quite efficient, as benchmarks will demonstrate. This, however, cannot be said
+for ellipse, plane and line in 2D. Despite being accessible, detectors for
+these shapes do not seem to function.
 
 \section{Library Structure}
 
@@ -215,14 +225,13 @@ As for shapes, the goal was to implement RANSAC for the following objects:
 \end{enumerate}
 Also, two other objects were implemented: a staircase and M\"obius strip.
 
-To achieve ease of use, we decided, that we would create and interface for each
-surface that would be used in RANSAC. It should be easy to implemet shapes, so
+To achieve ease of use, we decided, that we would create an interface for each
+surface that would be used in RANSAC. It should be easy to implement shapes, so
 we decided to create a single interface for surfaces.
 
 To properly test all the shapes, it was decided, that starkit-ransac should
 have a generation module. All generation functions should be able to add noise
-and generate any surface based on a model and generate any surface based on a
-model.
+and generate any surface based on a model.
 
 Another consideration for ease of use was visualization. We decided that we
 should implement a visualization module that would allow for visualization of
@@ -249,86 +258,156 @@ RANSAC implementation and has the following attributes:
 \begin{itemize}
     \item num\_samples -- a field that tells how many samples of data are
         required to build a single model,
-    \item fit\_model -- a method that accepts samples and set's it's instance
-        class' parameters to the ones described by samples,
+    \item fit\_model -- a method that accepts samples and sets its instance
+        class parameters to the ones described by samples,
     \item calc\_distances -- a method that accepts a list of points and returns
         a list of distances from these points to the surface.
 \end{itemize}
 This interface allows to write a single RANSAC class that than can be used to
-detect any surface that has these attributes. At same time, this design has
-it's drawbacks. For example, it can't be vectorized easily. In general case, it
+detect any surface that has these attributes. At the same time, this design has
+its drawbacks. For example, it can't be vectorized easily. In general case, it
 is impossible to calculate all distances for all models using a single dot
 product or something similar.
 
-Second, we implemeted a basic RANSAC class. One of the considerations was that
-user may want to detect different objects on the same point cloud. Therefore, a
+Second, we implemented a basic RANSAC class. One of the considerations was that
+the user may want to detect different objects on the same point cloud. Therefore, a
 RANSAC class may be initialized with a set of points and points may be added
-later. As of now, this class present only one way to fit and sample, however
-it's implementation allows for easy modification and addition of other methods
+later. As of now, this class presents only one way to fit and sample, however
+its implementation allows for easy modification and addition of other methods
 of scoring or sampling. As a result, this class return a fit object, that can
 be used for visualization, data generation etc.
 
-Generation module generates any number of point for any model passed to it with
+Generation module generates any number of points for any model passed to it with
 any standard deviation. It allows for easy comparison with a perfect model and
 allows for easy testing.
 
-%todo: add open3d
+\begin{figure*}[ht]
+\centering
+
+% First row: 4 figures
+\subfloat[Line in 3D]{\includegraphics[width=0.24\textwidth]{figures/line3d.png}}\hfill
+\subfloat[Plane in 3D]{\includegraphics[width=0.24\textwidth]{figures/plane.png}}\hfill
+\subfloat[Circle in 3D]{\includegraphics[width=0.24\textwidth]{figures/circle3d.png}}\hfill
+\subfloat[Sphere]{\includegraphics[width=0.24\textwidth]{figures/sphere.png}}
+
+\vspace{1mm} % Adjust gap between rows here
+
+% Second row: 3 figures, perfectly centered
+\hfill
+\subfloat[Ellipsoid]{\includegraphics[width=0.32\textwidth]{figures/ellipsoid.png}}\hfill
+\subfloat[Staircase]{\includegraphics[width=0.32\textwidth]{figures/stairs.png}}\hfill
+\subfloat[M\"obius strip]{\includegraphics[width=0.32\textwidth]{figures/mobius_strip.png}}\hfill
+
+\caption{Visualized results of starkit-ransac}
+\label{fig:available-shapes}
+\end{figure*}
+
 Another stated goal is visualization. One of the most convenient tools for this
 purpose is open3d\cite{open3d} library. Visualization module contains functions
 to visualize all the objects. All visualization functions accept a model as
 their input parameter and return something that can be directly drawn via
-open3d.
+open3d. Result of our RANSAC implementation were visualized using
+starkit-ransac's visualization module and are shown on
+Fig.~\ref{fig:available-shapes}.
 
-\section{Comparison}
 
-\subsection{Benchmarking setup}
+\section{Results}
+
+\subsection{Benchmarking Setup}
 Our library includes a test suite to validate all the shapes on different sets
 of data. Also, it creates multiple sets of test data that can be repurposed and
 used in other scenarios. To benchmark and compare the results, we decided to
 set a fixed number of 500 RANSAC iterations and fixed distance threshold of 0.1
-for all shapes. Benchmarking was conducted using pytest\_benchmark plugin for
-pytest. We evaluated the time required to fit a model including hypothesis
-evaluation and sampling, i.e. one full RANSAC run.
+for all shapes. Benchmark times are averaged over point clouds of $N \in \{500,
+1000, 2500, 5000\}$, Gaussian noise $\sigma \in \{0., 0.01, 0.02, 0.05, 0.1\}$
+and various shape parameters.
+
+Benchmarking was conducted using pytest\_benchmark plugin for pytest. We
+evaluated the time required to fit a model including hypothesis evaluation and
+sampling, i.e. one full RANSAC run. Benchmarks were executed on an AMD Ryzen 7
+8845HS CPU with 16 GB RAM, running Python 3.12.12 and NumPy 1.26.4 under Arch
+Linux with kernel 6.19.10.
 
 Since shapes included in starkit-ransac and other libraries are not the same,
 we benchmarked only those shapes that were available in at least one of other
 libraries. We compared pyRANSAC-3D's fitting with ours on the following shapes:
-line, plane, circle in 3D and sphere. scuf was benchmarked only on ellipsoid
+line, plane, circle in 3D and sphere. SCUF was benchmarked only on ellipsoid
 and sphere. 
 
-\subsection{Benchmark results}
-%todo: add figures
-As shown on figure~\ref{fig:comparison}, we can see that starkit-ransac is much
-faster that pyRANSAC-3D on fitting a line and circle in 3D. We believe that
-line fitting is this much faster because of a better distance evaluation that uses no
+\subsection{Benchmark Results}
 
-\begin{figure}
-    \begin{center}
-        \includegraphics{figures/pyransac-comparison.png}
-    \end{center}
-    \caption{}\label{fig:comparison}
+\begin{figure}[htbp]
+    \centerline{\includegraphics[width=0.48\textwidth]{figures/pyRANSAC-comparison.png}}
+\caption{Performance comparison of starkit-ransac and pyRANSAC-3D.}
+\label{fig:comparison-pyRANSAC}
 \end{figure}
 
 \begin{figure}[htbp]
-\centerline{\includegraphics{figures/pyransac-comparison.png}}
-\caption{Example of a figure caption. \textit{(figure caption).}}
-\label{fig}
+    \centerline{\includegraphics[width=0.48\textwidth]{figures/SCUF-comparison.png}}
+\caption{Performance comparison of starkit-ransac and SCUF.}
+\label{fig:comparison-SCUF}
 \end{figure}
 
+Fig.~\ref{fig:comparison-pyRANSAC} and Fig.~\ref{fig:comparison-SCUF} present
+the benchmark results on various shapes. As stated before, this was tested on
+500 iterations.
+
+As shown on Fig.~\ref{fig:comparison-pyRANSAC}, we can see that starkit-ransac
+is much faster than pyRANSAC-3D on fitting a line, a plane and a circle in 3D.
+One of the reasons for this difference in performance may be the fact, that
+pyRANSAC-3D returns inliers after executing its RANSAC algorithm. This,
+however, is not the only reason for such drastic difference. For line, we
+believe that the most significant factor is distance evaluation. In
+pyRANSAC-3D, a somewhat expensive function \texttt{np.linalg.norm} is called
+for each point of the dataset on each iteration, while starkit-ransac only
+calls it once per iteration. Circle is faster due to a slightly different
+fitting algorithm.
+
+Fig.~\ref{fig:comparison-SCUF} shows more moderate differences. It is worth
+noting, that for the sphere comparison, SCUF's ellipsoid fitter was used as a
+proxy, as SCUF lacks a dedicated sphere implementation. While this provides a
+functional baseline, it should be noted that SCUF's generic quadric solver
+incurs additional overhead compared to our specialized analytical sphere
+fitter based on \cite{bourke_circlesphere}.
+
+Full comparison of the three libraries with exact averaged times is shown in Table~\ref{tab:final}.
+
+\section{Conclusions}
+
+
+A general-purpose RANSAC library called starkit-ransac was presented in this
+paper. This library contains mostly basic shapes and two specific objects.
+This library is going to be expanded in the future. In the near future we
+plan to add more shapes, with cylinder and cuboid as the highes priorities.
+The library was released on PyPI and can be installed with \texttt{pip install
+starkit-ransac}. This package was benchmarked against two other RANSAC
+libraries: pyRANSAC-3D and SCUF. Benchmarks showed that starkit-ransac is
+significantly faster on the majority of shapes it provides than its
+alternatives. Benchmarks are presented in Fig.~\ref{fig:comparison-pyRANSAC},
+Fig.~\ref{fig:comparison-SCUF} and in Table~\ref{tab:final}. One of the next
+steps will also be profiling the library to optimize it even further. And
+lastly, we plan on polishing starkit-ransac to make it even easier to use. The
+package will be maintained for the foreseeable future with bugfixes, new shapes
+and overall polish. All of the code is fully available on GitHub\cite{skorobogatov2026starkit}.
+
+\begin{table*}[htbp]
+\caption{\textsc{Time for 500 Iterations of RANSAC on Different Objects in Seconds}}
+\centering
+\setlength{\tabcolsep}{18pt}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\tableheadsize\textbf{Library}} & \multicolumn{5}{c|}{\tableheadsize\textbf{Shape}} \\
+\cline{2-6}
+ & \tablesubheadsize\textbf{Line 3D} & \tablesubheadsize\textbf{Plane} & \tablesubheadsize\textbf{Circle 3D} & \tablesubheadsize\textbf{Sphere} & \tablesubheadsize\textbf{Ellipsoid} \\
+\hline
+starkit-ransac & 0.0256 & 0.0119 & 0.0547  & 0.0218 & 0.0505 \\
+pyRANSAC-3D    &         0.2388  &         0.0223  &          0.1134  &         0.0267  &   --   \\
+SCUF           &           --    &           --    &            --    &         0.0646  & 0.0479 \\
+\hline
+\end{tabular}
+\label{tab:final}
+\end{table*}
 
 \printbibliography
-% \begin{thebibliography}{00}
-% \bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955. \textit{(references)}
-% \bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
-% \bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
-% \bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
-% \bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
-% \bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
-% \bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
-% \bibitem{b8}	V. Puzyrev, S. Koric, and S. Wilkin, “Evaluation of parallel direct sparse linear solvers in electromagnetic geophysical problems,” Comput. Geosci., vol. 89, pp.79–87, 2016.
-% \end{thebibliography}
-\vspace{12pt}
-\color{red}
-IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
 
 \end{document}
