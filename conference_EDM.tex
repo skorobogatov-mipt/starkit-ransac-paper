@@ -90,21 +90,21 @@ Dolgoprudny, Russia  \\
 
 \begin{abstract}
 
-RANSAC, first presented in \cite{ransac-orig} is one of the most popular and important algorithms in computer vision.
-It is being used in robotics, medical imaging and many more fields. Also,
-Python is one of the most frequently used languages at the moment, especially
-in computer vision. In spite of the facts above, the options for a Python
-library for RANSAC that works out-of-the-box are very limited. This presents
-starkit-ransac -- a Python package with algorithms for detecting most of the
-common objects. In this work, firstly we go over alternatives: pyRANSAC-3D and
-SCUF. We look at their advantages and disadvantages and how we can improve on
-existing solutions. Secondly, we present our own solution -- starkit-ransac --
-a self-contained Python library for RANSAC with fitting, data generation and
-visualization. Finally, we compare this library to its alternatives via
-benchmarks and ease of use. Overall, starkit-ransac demonstrates significantly
-faster fitting times on several primitives while offering a more modular and
-flexible architecture than SCUF and pyRANSAC-3D, allowing for easy addition of
-new shapes.
+RANSAC, first presented in \cite{ransac-orig} is one of the most popular and
+important algorithms in computer vision. It is being used in robotics, medical
+imaging and many more fields. Also, Python is one of the most frequently used
+languages at the moment, especially in computer vision. In spite of the facts
+above, the options for a Python library for RANSAC that works out-of-the-box
+are very limited. This presents starkit-ransac -- a Python package with
+algorithms for detecting most of the common objects. In this work, firstly we
+go over alternatives: pyRANSAC-3D and SCUF. We look at their advantages and
+disadvantages and how we can improve on existing solutions. Secondly, we
+present our own solution -- starkit-ransac -- a self-contained Python library
+for RANSAC with fitting, data generation and visualization. Finally, we compare
+this library to its alternatives via benchmarks and ease of use. Overall,
+starkit-ransac demonstrates significantly faster fitting times on several
+primitives while offering a more modular and flexible architecture than SCUF
+and pyRANSAC-3D, allowing for easy addition of new shapes.
 
 \end{abstract}
 
@@ -130,7 +130,9 @@ objects that are used frequently and acts as a framework would be quite useful
 in many fields, such as robotics. 
 While RANSAC is widely implemented, few packages offer a cohesive, maintained
 solution for 3D geometric primitives. Thus, a Python package that is modular,
-contains all the basic shapes and works out of the box is presented.
+contains all the basic shapes and works out of the box is presented. The
+package in question was released on PyPI and source code is available at
+GitHub~\cite{skorobogatov2026starkit}.
 
 \section{Previous Works}
 Our review revealed numerous RANSAC implementations, yet few are tailored for
@@ -298,6 +300,7 @@ allows for easy testing.
 \subfloat[Staircase]{\includegraphics[width=0.32\textwidth]{figures/stairs.png}}\hfill
 \subfloat[M\"obius strip]{\includegraphics[width=0.32\textwidth]{figures/mobius_strip.png}}\hfill
 
+\captionsetup{font=footnotesize}
 \caption{Visualized results of starkit-ransac}
 \label{fig:available-shapes}
 \end{figure*}
@@ -312,7 +315,6 @@ Fig.~\ref{fig:available-shapes}.
 
 
 \section{Results}
-
 \subsection{Benchmarking Setup}
 Our library includes a test suite to validate all the shapes on different sets
 of data. Also, it creates multiple sets of test data that can be repurposed and
@@ -335,22 +337,21 @@ line, plane, circle in 3D and sphere. SCUF was benchmarked only on ellipsoid
 and sphere. 
 
 \subsection{Benchmark Results}
-
 \begin{figure}[htbp]
     \centerline{\includegraphics[width=0.48\textwidth]{figures/pyRANSAC-comparison.png}}
+\captionsetup{font=footnotesize}
 \caption{Performance comparison of starkit-ransac and pyRANSAC-3D.}
 \label{fig:comparison-pyRANSAC}
 \end{figure}
-
 \begin{figure}[htbp]
     \centerline{\includegraphics[width=0.48\textwidth]{figures/SCUF-comparison.png}}
+\captionsetup{font=footnotesize}
 \caption{Performance comparison of starkit-ransac and SCUF.}
 \label{fig:comparison-SCUF}
 \end{figure}
-
 Fig.~\ref{fig:comparison-pyRANSAC} and Fig.~\ref{fig:comparison-SCUF} present
 the benchmark results on various shapes. As stated before, this was tested on
-500 iterations.
+500 RANSAC iterations with averaging over different parameters.
 
 As shown on Fig.~\ref{fig:comparison-pyRANSAC}, we can see that starkit-ransac
 is much faster than pyRANSAC-3D on fitting a line, a plane and a circle in 3D.
@@ -374,7 +375,6 @@ Full comparison of the three libraries with exact averaged times is shown in Tab
 
 \section{Conclusions}
 
-
 A general-purpose RANSAC library called starkit-ransac was presented in this
 paper. This library contains mostly basic shapes and two specific objects.
 This library is going to be expanded in the future. In the near future we
@@ -391,9 +391,10 @@ package will be maintained for the foreseeable future with bugfixes, new shapes
 and overall polish. All of the code is fully available on GitHub\cite{skorobogatov2026starkit}.
 
 \begin{table*}[htbp]
+\captionsetup{font=footnotesize}
 \caption{\textsc{Time for 500 Iterations of RANSAC on Different Objects in Seconds}}
 \centering
-\setlength{\tabcolsep}{18pt}
+\setlength{\tabcolsep}{19.5pt}
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
 \multirow{2}{*}{\tableheadsize\textbf{Library}} & \multicolumn{5}{c|}{\tableheadsize\textbf{Shape}} \\
